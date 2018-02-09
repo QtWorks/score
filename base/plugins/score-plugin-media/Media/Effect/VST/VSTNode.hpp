@@ -212,9 +212,9 @@ class vst_node final : public ossia::graph_node
     }
     void run(ossia::token_request tk, ossia::execution_state& st) override
     {
-      if(tk.date > m_prev_date)
+      if(tk.date > m_prev_date && tk.speed > 0)
       {
-        const std::size_t samples = tk.date - m_prev_date;
+        const std::size_t samples = (tk.date - m_prev_date) / tk.speed;
         setControls();
         setupTimeInfo(tk, st);
 
